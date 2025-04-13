@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Completo Dron SG907 MAX (Español)</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4HCMMzUfSEQU3TUYEupdSaugreq8NEpLBNtRsfNzuTnc7BaBUdCXokDXrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        :root {
+            --primary-color: #0056b3; /* Azul principal */
+            --secondary-color: #007bff; /* Azul secundario */
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --text-color: #343a40;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffc107;
+            --warning-text: #856404;
+            --note-bg: #e2e3e5;
+            --note-border: #6c757d;
+            --note-text: #383d41;
+            --step-bg: #d1ecf1;
+            --step-border: #007bff;
+            --step-text: #0c5460;
+            --danger-color: #d9534f; /* Rojo para destacar */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px 40px 40px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #manualContent { /* Contenedor para la captura PDF */
+          padding-top: 20px;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid var(--medium-gray);
+        }
+        h1 {
+            text-align: center;
+            border-bottom: none;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+        }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.5em; border-bottom-width: 2px; color: var(--secondary-color);}
+        h4 { font-size: 1.2em; border-bottom: none; color: var(--dark-gray); }
+
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-bottom: 18px;
+            padding-left: 30px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 25px auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: var(--medium-gray); /* Fondo para placeholders */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .warning, .note, .important-step {
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border-left-width: 6px;
+            border-left-style: solid;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .warning {
+            background-color: var(--warning-bg);
+            border-left-color: var(--warning-border);
+            color: var(--warning-text);
+        }
+        .note {
+            background-color: var(--note-bg);
+            border-left-color: var(--note-border);
+            color: var(--note-text);
+        }
+        .important-step {
+            background-color: var(--step-bg);
+            border-left-color: var(--step-border);
+            color: var(--step-text);
+        }
+        strong, .highlight {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        code {
+            background-color: #f1f1f1;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #333;
+        }
+        .center-text {
+            text-align: center;
+        }
+        .section-divider {
+            border: 0;
+            border-top: 4px dashed var(--primary-color);
+            margin: 50px 0;
+            opacity: 0.5;
+        }
+        #toc {
+            background-color: var(--medium-gray);
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        #toc h3 {
+            margin-top: 0;
+            border-bottom: none;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        #toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2; /* Dos columnas para la tabla de contenidos */
+        }
+        #toc li {
+            margin-bottom: 8px;
+        }
+        #toc a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        #toc a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        #downloadPdfBtn {
+            display: block;
+            margin: 20px auto 30px auto;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: var(--secondary-color);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #downloadPdfBtn:hover {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        #pdfStatus {
+            text-align: center;
+            margin-top: -20px;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: var(--dark-gray);
+            min-height: 1.5em; /* Evita saltos de diseño */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: var(--medium-gray);
+            color: #495057;
+            font-weight: 600;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: var(--light-gray);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
+            font-size: 0.9em;
+            color: var(--dark-gray);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.3em; }
+            #toc ul { column-count: 1; } /* Una columna en móviles */
+            th, td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Manual Completo: Dron SG907 MAX</h1>
+        <p class="center-text">Tu guía definitiva para volar con seguridad y aprovechar al máximo tu dron. <br><em>(Versión adaptada para España, 13 de Abril de 2025)</em></p>
+
+        <nav id="toc">
+            <h3>Tabla de Contenidos</h3>
+            <ul>
+                <li><a href="#seguridad">1. Seguridad Primero</a></li>
+                <li><a href="#contenido">2. Contenido de la Caja</a></li>
+                <li><a href="#anatomia">3. Conoce tu Equipo</a></li>
+                <li><a href="#preparacion">4. Preparación (¡Crucial!)</a></li>
+                <li><a href="#calibracion">5. Calibración Obligatoria</a></li>
+                <li><a href="#app">6. Conectar la APP Móvil</a></li>
+                <li><a href="#modos">7. Modos de Vuelo</a></li>
+                <li><a href="#volar">8. ¡A Volar!</a></li>
+                <li><a href="#funciones">9. Funciones Adicionales</a></li>
+                <li><a href="#funciones-app">10. Funciones Inteligentes APP</a></li>
+                <li><a href="#problemas">11. Solución de Problemas</a></li>
+                <li><a href="#mantenimiento">12. Mantenimiento</a></li>
+            </ul>
+        </nav>
+
+        <button id="downloadPdfBtn">Descargar Manual como PDF</button>
+        <p id="pdfStatus"></p>
+
+        <div id="manualContent">
+
+            <img src="https://placehold.co/700x350/0056b3/ffffff?text=Dron+SG907+MAX+en+Vuelo+(Ejemplo)" alt="Dron SG907 MAX en vuelo (imagen de ejemplo)">
+
+            <section id="seguridad">
+                <h2>1. ¡Importante! Seguridad Primero</h2>
+                <div class="warning">
+                    <p><strong>¡ATENCIÓN MÁXIMA!</strong> Este dron no es un juguete (edad recomendada: 14+). Su uso incorrecto puede provocar daños materiales, lesiones graves e incluso infringir la ley.</p>
+                    <ul>
+                        <li><strong>LEE TODO EL MANUAL</strong> antes de tu primer vuelo.</li>
+                        <li><strong>INFÓRMATE SOBRE LA NORMATIVA:</strong> Consulta la web de AESA (Agencia Estatal de Seguridad Aérea) para conocer las reglas vigentes en España para volar drones recreativos (categoría abierta, subcategorías A1/A3 según peso y características). Es posible que necesites registrarte como operador y/o pasar un examen online.</li>
+                        <li><strong>VUELA EN ZONAS PERMITIDAS:</strong> Usa aplicaciones como ENAIRE Drones para verificar dónde puedes volar legalmente. Evita zonas cercanas a aeropuertos, aeródromos, helipuertos, zonas militares, parques naturales protegidos, o áreas urbanas densamente pobladas si tu dron no cumple los requisitos para ello.</li>
+                        <li><strong>MANTÉN DISTANCIA SEGURA:</strong> Nunca vueles sobre personas ajenas a la operación. Mantén siempre una distancia segura de personas, animales, vehículos y edificios.</li>
+                        <li><strong>VUELA DE DÍA Y CON BUEN TIEMPO:</strong> Evita volar de noche (salvo permisos especiales), con lluvia, niebla, o viento fuerte.</li>
+                        <li><strong>MANTÉN EL DRON A LA VISTA (VLOS):</strong> Nunca pierdas de vista tu dron mientras vuela. No te fíes únicamente de la cámara (FPV) para el control primario.</li>
+                        <li><strong>RESPETA LA PRIVACIDAD:</strong> No grabes imágenes de personas o propiedades privadas sin consentimiento.</li>
+                        <li><strong>NO INTERFIERAS:</strong> Aterriza inmediatamente si ves otras aeronaves (aviones, helicópteros, otros drones).</li>
+                        <li><strong>CONDICIONES PERSONALES:</strong> No vueles bajo los efectos del alcohol, drogas, medicamentos que afecten tu capacidad, o si estás fatigado.</li>
+                        <li><strong>HÉLICES PELIGROSAS:</strong> Son la parte más peligrosa. Asegúrate de que estén bien instaladas y sin daños. Mantén dedos, pelo y ropa suelta lejos de ellas cuando los motores estén armados o girando.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section id="contenido">
+                <h2>2. ¿Qué hay en la Caja?</h2>
+                <ul>
+                    <li>Dron SG907 MAX (plegado)</li>
+                    <li>Control Remoto</li>
+                    <li>Batería(s) Inteligente(s) del Dron</li>
+                    <li>Cable(s) de Carga USB (para dron y mando)</li>
+                    <li>Juego de Hélices de Repuesto (A y B)</li>
+                    <li>Destornillador pequeño (para hélices, si aplica)</li>
+                    <li>Manual de Instrucciones original (guarda esta guía también)</li>
+                </ul>
+                <img src="https://placehold.co/600x300/cccccc/333?text=Contenido+Desempaquetado" alt="Contenido de la caja del dron desempaquetado">
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section id="anatomia">
+                <h2>3. Conoce tu Equipo</h2>
+
+                <h3>El Dron SG907 MAX</h3>
+                <img src="https://placehold.co/700x450/e9ecef/333?text=Diagrama+Detallado+del+Dron" alt="Diagrama detallado de las partes del dron SG907 MAX">
+                <ol>
+                    <li>Cámara con Estabilizador Gimbal (PTZ)</li>
+                    <li>Motores Brushless (sin escobillas, más eficientes)</li>
+                    <li>Hélices Plegables (verificar marcas A/B)</li>
+                    <li>Luces LED Delanteras (blancas o de color)</li>
+                    <li>Luces LED Traseras (indican estado, a menudo rojas/verdes)</li>
+                    <li>Sensor de Flujo Óptico (cámara inferior para estabilidad a baja altura)</li>
+                    <li>Compartimento y Conector de Batería</li>
+                    <li>Antenas Internas (GPS, WiFi, Control)</li>
+                    <li>Botón de Encendido/Apagado</li>
+                    <li>Cuerpo Plegable</li>
+                </ol>
+                 <div class="warning">
+                    <p><strong>¡Recuerda! Cuidado con la Cámara Gimbal:</strong></p>
+                    <ol>
+                        <li><strong>Quita el protector SIEMPRE</strong> antes de encender.</li>
+                        <li><strong>NUNCA TOQUES la cámara</strong> mientras el dron se enciende o calibra. Se mueve sola y forzarla la puede dañar.</li>
+                    </ol>
+                </div>
+                <img src="https://placehold.co/400x250/fff3cd/856404?text=Importante:+Quitar+Protector+Gimbal" alt="Recordatorio: Quitar protector del gimbal antes de encender">
+
+                <h3>El Control Remoto</h3>
+                <img src="https://placehold.co/700x450/e9ecef/333?text=Diagrama+Detallado+del+Mando" alt="Diagrama detallado de las partes del control remoto">
+                 <ol>
+                    <li>Antenas (despliégalas para mejor señal)</li>
+                    <li>Soporte Ajustable para Teléfono Móvil</li>
+                    <li>Palanca Izquierda (Stick): Acelerador (Subir/Bajar) y Guiñada (Girar Izq/Der) - Modo 2</li>
+                    <li>Palanca Derecha (Stick): Dirección (Adelante/Atrás/Lado Izq/Lado Der) - Modo 2</li>
+                    <li>Botón de Encendido/Apagado</li>
+                    <li>Botón Despegue/Aterrizaje Automático</li>
+                    <li>Botón Retorno a Casa (RTH)</li>
+                    <li>Botón de Tomar Foto</li>
+                    <li>Botón de Iniciar/Detener Vídeo</li>
+                    <li>Rueda/Botón de Control de Inclinación Cámara (Gimbal Tilt)</li>
+                    <li>Botón de Cambio de Modo GPS/OPTI</li>
+                    <li>Botón de Modo Headless (Sin Cabeza)</li>
+                    <li>Pantalla LCD Informativa</li>
+                    <li>Puerto de Carga USB</li>
+                </ol>
+                <h4>Interpretando la Pantalla LCD del Mando</h4>
+                <img src="https://placehold.co/500x250/e9ecef/333?text=Detalle+Pantalla+LCD+Mando" alt="Detalle de la información en la pantalla LCD del control remoto">
+                <p>Es tu centro de información rápida. Busca estos iconos:</p>
+                <ul>
+                    <li><strong class="highlight">Modo Vuelo:</strong> Modo 1 (OPTI) / Modo 2 (GPS).</li>
+                    <li><strong class="highlight">Satélites GPS:</strong> Número de satélites conectados (necesitas >7-10 para un buen posicionamiento GPS).</li>
+                    <li><strong class="highlight">Batería Dron:</strong> Nivel de carga del dron (¡muy importante!).</li>
+                    <li><strong class="highlight">Batería Mando:</strong> Nivel de carga del control remoto.</li>
+                    <li><strong class="highlight">Señal:</strong> Intensidad de la conexión entre mando y dron.</li>
+                    <li><strong class="highlight">Distancia (D):</strong> Distancia horizontal del dron a ti.</li>
+                    <li><strong class="highlight">Altura (H):</strong> Altura del dron sobre el punto de despegue.</li>
+                    <li><strong>Iconos Estado:</strong> Grabando vídeo, modo headless activo, RTH iniciado, etc.</li>
+                </ul>
+            </section>
+
+            <div class="section-divider"></div>
+
+             <section id="preparacion">
+                <h2>4. Preparación Antes del Vuelo (¡Pasos Cruciales!)</h2>
+                <p>Sigue estos pasos en orden para una preparación correcta y segura.</p>
+
+                <div class="important-step">
+                    <h3>Paso 4.1: Cargar Completamente las Baterías</h3>
+                    <p>Un vuelo seguro empieza con baterías llenas. ¡No te saltes este paso!</p>
+                    <ol>
+                        <li><strong>Batería del Dron:</strong> Extráela presionando los seguros y deslizándola. Usa el cable USB y un cargador de pared USB (tipo móvil, recomendado 5V/2A para carga más rápida si la batería lo soporta, si no 5V/1A). Observa las luces LED de la batería para ver el progreso de carga. Carga completa cuando todas las luces estén fijas o se apaguen (consulta manual original).</li>
+                        <li><strong>Control Remoto:</strong> Conéctalo también mediante su puerto USB a un cargador hasta que esté lleno (suele tener un indicador LED).</li>
+                    </ol>
+                    <img src="https://placehold.co/600x300/d1ecf1/0c5460?text=Cargando+Bateria+Dron+y+Mando" alt="Cargando la batería del dron y el mando remoto">
+                     <div class="note">
+                        <h4>Cuidado Esencial de las Baterías Lipo:</h4>
+                        <ul>
+                            <li><strong>Supervisión:</strong> No dejes baterías cargando sin vigilancia, especialmente durante la noche.</li>
+                            <li><strong>Temperatura:</strong> No cargues ni uses baterías muy calientes (después de volar) o muy frías. Deja que alcancen temperatura ambiente.</li>
+                            <li><strong>Daños:</strong> Nunca uses una batería hinchada, perforada o dañada. Deséchala de forma segura (punto limpio).</li>
+                            <li><strong>Descarga:</strong> Evita descargar las baterías por completo. Aterriza cuando el dron te avise de batería baja (suele ser ~20-25%).</li>
+                            <li><strong>Almacenamiento:</strong> Si no vas a volar en semanas, guarda las baterías a media carga (aprox. 40-60%) en un lugar fresco y seguro (una bolsa ignífuga Lipo es ideal).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="important-step">
+                    <h3>Paso 4.2: Instalar la Batería en el Dron</h3>
+                    <p>Con la batería cargada, insértala firmemente en el dron. Debe encajar perfectamente y oírse un <strong class="highlight">"clic"</strong> del seguro. Tira suavemente para confirmar que no se sale.</p>
+                    <img src="https://placehold.co/500x300/d1ecf1/0c5460?text=Asegurando+Bateria+en+Dron" alt="Asegurando la batería correctamente en el dron">
+                </div>
+
+                <div class="important-step">
+                    <h3>Paso 4.3: Desplegar Brazos y Verificar Hélices</h3>
+                    <ol>
+                        <li>Despliega los brazos del dron suavemente hasta su posición de bloqueo.</li>
+                        <li><strong class="highlight">Inspección Visual:</strong> Revisa CADA hélice buscando grietas, muescas o deformaciones. Una hélice dañada puede romperse en vuelo y causar un accidente. ¡Reemplázala si tienes dudas!</li>
+                        <li><strong>Instalación Correcta (si aplica):</strong> Fíjate bien en las letras (A/B) o marcas de color en hélices y motores. Cada hélice tiene su lugar y sentido de giro. Ponerlas mal hará que el dron no despegue o vuelque. Aprieta los tornillos (si los lleva) sin pasarte.</li>
+                    </ol>
+                    <img src="https://placehold.co/600x350/d1ecf1/0c5460?text=Verificando+Helices+A/B+y+Estado" alt="Verificación del estado y la correcta instalación de las hélices A y B">
+                </div>
+
+                 <div class="important-step">
+                    <h3>Paso 4.4: Encendido y Emparejamiento (Vinculación Mando-Dron)</h3>
+                    <p>Establece la conexión inalámbrica entre el control remoto y el dron.</p>
+                    <ol>
+                        <li>Elige tu <strong>zona de despegue:</strong> Un lugar plano, nivelado, abierto, sin obstáculos cercanos y lejos de posibles interferencias metálicas o magnéticas.</li>
+                        <li>Coloca el dron en el suelo mirando en dirección contraria a ti.</li>
+                        <li><strong class="highlight">SECUENCIA CLAVE:</strong></li>
+                        <li>   a. <strong>ENCIENDE PRIMERO EL DRON:</strong> Mantén pulsado su botón de encendido (2-3 seg). Las luces del dron se encenderán y parpadearán.</li>
+                        <li>   b. <strong>ENCIENDE SEGUNDO EL MANDO:</strong> Mantén pulsado su botón de encendido. Emitirá un pitido y su pantalla/LED se encenderá y parpadeará.</li>
+                        <li>Espera unos segundos. Oirás otro pitido del mando y su luz/pantalla quedará fija. Las luces del dron cambiarán a un parpadeo más lento. <strong class="highlight">¡Listo! Ya están conectados.</strong></li>
+                    </ol>
+                    <img src="https://placehold.co/600x300/d1ecf1/0c5460?text=Secuencia+Correcta:+1%C2%BA+Dron,+2%C2%BA+Mando" alt="Secuencia correcta de encendido para emparejamiento: primero dron, luego mando">
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section id="calibracion">
+                 <h2>5. Calibración Obligatoria (Brújula y Giroscopio)</h2>
+                <p>Este es un paso <strong class="highlight">CRÍTICO y OBLIGATORIO</strong> antes del primer vuelo en una nueva ubicación, o si el dron vuela de forma extraña. Ayuda al dron a orientarse correctamente y a volar estable. Hazlo <strong class="highlight">SIEMPRE en este orden</strong>.</p>
+
+                <div class="important-step">
+                    <h3>Paso 5.1: Calibración Geomagnética (Brújula / Compás)</h3>
+                    <p>Le indica al dron dónde está el Norte para que sepa su orientación.</p>
+                    <ol>
+                        <li>Con dron y mando encendidos y vinculados, busca el botón de calibración de brújula en el mando (a menudo el mismo que el de foto, mantenido pulsado, o uno específico) y <strong class="highlight">mantenlo presionado ~5 segundos</strong> hasta oír un pitido. Las luces del dron parpadearán rápidamente.</li>
+                        <li><strong class="highlight">Giro Horizontal:</strong> Levanta el dron horizontalmente (paralelo al suelo). Gira LENTAMENTE sobre ti mismo, haciendo que el dron complete una vuelta completa (360°) en sentido horario. Espera el pitido del mando.</li>
+                        <li><strong class="highlight">Giro Vertical:</strong> Ahora, coloca el dron verticalmente, con la <strong class="highlight">cámara apuntando HACIA ABAJO</strong>. Gira LENTAMENTE sobre ti mismo otra vez, haciendo que el dron complete una vuelta completa (360°) en sentido horario. Espera el pitido final del mando.</li>
+                        <li>Las luces del dron deberían pasar a un parpadeo más lento. ¡Brújula calibrada!</li>
+                    </ol>
+                     <img src="https://placehold.co/700x400/d1ecf1/0c5460?text=Calibracion+Brujula%0A1.+Giro+Horizontal+360%C2%B0%0A2.+Giro+Vertical+360%C2%B0+(Camara+Abajo)" alt="Pasos de la calibración geomagnética: Giro horizontal 360°, luego giro vertical 360° con cámara abajo">
+                     <div class="warning">
+                        <p><strong>¡Errores Comunes en Calibración de Brújula!</strong></p>
+                        <ul>
+                            <li>Hacerlo cerca de objetos metálicos grandes (coches, vallas, estructuras).</li>
+                            <li>Hacerlo sobre suelo con armaduras metálicas (parkings, edificios).</li>
+                            <li>Llevar encima objetos metálicos o magnéticos (móvil en el bolsillo, llaves, reloj).</li>
+                            <li>Girar demasiado rápido.</li>
+                        </ul>
+                        <p>Si falla (las luces no cambian o la app da error), aléjate a una zona más abierta y repite.</p>
+                    </div>
+                </div>
+
+                 <div class="important-step">
+                    <h3>Paso 5.2: Calibración del Giroscopio (IMU / Nivel)</h3>
+                    <p>Pone a cero los sensores de movimiento para que el dron sepa qué es estar nivelado.</p>
+                    <ol>
+                        <li>Coloca el dron sobre una superficie <strong class="highlight">TOTALMENTE PLANA Y NIVELADA</strong>. Es crucial que no esté inclinado.</li>
+                        <li>Busca el botón o combinación de palancas para calibrar el giroscopio (a veces es mantener pulsada la palanca izquierda, otras veces mover ambas palancas a una posición específica como abajo-izquierda, consulta tu manual). <strong class="highlight">Realiza la acción indicada</strong> hasta que el mando pite.</li>
+                        <li>Las luces del dron parpadearán rápidamente y luego volverán a su estado normal (parpadeo lento esperando GPS, o fijo si ya tiene). ¡Giroscopio calibrado!</li>
+                    </ol>
+                     <img src="https://placehold.co/600x300/d1ecf1/0c5460?text=Calibracion+Giroscopio+(Dron+Quieto+en+Suelo+Plano)" alt="Calibración del giroscopio colocando el dron quieto en una superficie perfectamente plana">
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+             <section id="app">
+                 <h2>6. Conectar la Aplicación Móvil (APP)</h2>
+                <p>La app (como "XL PRO" u otra específica) te da FPV (vista en primera persona), telemetría y acceso a funciones avanzadas.</p>
+                <ol>
+                    <li><strong>Descarga e Instala:</strong> Usa el código QR del manual o busca el nombre de la app en tu tienda (iOS/Android).</li>
+                    <li><strong>Conexión WiFi Dron-Móvil:</strong>
+                        <ul>
+                            <li>Con el dron encendido (y el mando también, si vas a usar ambos), ve a los <strong class="highlight">Ajustes WiFi</strong> de tu teléfono.</li>
+                            <li>Busca una red con un nombre similar a <code class="highlight">XL-PRO-5G-XXXX</code> o <code>Drone-WiFi-XXXX</code>.</li>
+                            <li><strong class="highlight">Conéctate</strong> a esa red. Normalmente no tiene contraseña.</li>
+                            <li>Tu móvil podría decir "Sin conexión a Internet" o "Conectado sin Internet". <strong class="highlight">¡Es normal!</strong> Ignora el aviso. Estás conectado directamente al dron, no a tu router.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Abre la APP:</strong> Inicia la aplicación del dron. Si la conexión WiFi es correcta, deberías ver la imagen de la cámara del dron en la pantalla de tu móvil y la interfaz de la app.</li>
+                </ol>
+                 <img src="https://placehold.co/350x350/e2e3e5/383d41?text=Escanear+QR+de+la+APP" alt="Código QR de ejemplo para descargar la aplicación del dron">
+                 <img src="https://placehold.co/600x300/e2e3e5/383d41?text=Ajustes+WiFi+M%C3%B3vil:+Conectar+a+'XL-PRO-5G-...'" alt="Pantalla de ajustes WiFi del móvil mostrando la conexión a la red del dron">
+                 <div class="note">
+                    <h4>Permisos de la App:</h4>
+                    <p>La primera vez que abras la app, es probable que te pida permisos para acceder a la ubicación (GPS), almacenamiento (guardar fotos/vídeos), cámara y micrófono. Debes <strong class="highlight">aceptar estos permisos</strong> para que la app funcione correctamente.</p>
+                    <h4>Controlar Solo con el Móvil:</h4>
+                    <p>Si prefieres volar usando solo la pantalla táctil del móvil (no recomendado para empezar), normalmente debes: Encender el dron -> Conectar el móvil al WiFi del dron -> Abrir la app. <strong class="highlight">NO enciendas el mando físico</strong> en este caso.</p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+             <section id="modos">
+                <h2>7. Entendiendo los Modos de Vuelo (GPS vs. Flujo Óptico)</h2>
+                <p>Es vital saber en qué modo estás volando, ya que afecta a la estabilidad y las funciones de seguridad.</p>
+                <ul>
+                    <li>
+                        <h3>Modo 2 (GPS - Predeterminado y Recomendado para Exteriores)</h3>
+                        <ul>
+                            <li>Utiliza satélites GPS + GLONASS para una localización precisa.</li>
+                            <li>Ofrece vuelo estacionario (hovering) muy estable y resistencia al viento moderado.</li>
+                            <li>Activa <strong class="highlight">TODAS las funciones de seguridad y modos inteligentes:</strong> Retorno a Casa (RTH), Sígueme, Waypoints, Órbita.</li>
+                            <li><strong class="highlight">Requiere buena recepción de satélites:</strong> Necesitas estar al aire libre, en una zona despejada. La pantalla del mando/app mostrará el número de satélites conectados (busca >10 para óptimo rendimiento).</li>
+                            <li><strong class="highlight">El dron NO DESPEGARÁ si no tiene suficientes satélites fijados</strong> en este modo. Es una medida de seguridad. ¡Ten paciencia y espera la señal!</li>
+                        </ul>
+                        <img src="https://placehold.co/200x200/e9ecef/333?text=Icono+GPS+OK" alt="Icono de señal GPS fuerte">
+                    </li>
+                    <li>
+                        <h3>Modo 1 (Flujo Óptico / OPTI / ATTI - Para Interiores o Sin GPS)</h3>
+                        <ul>
+                            <li>Utiliza la cámara inferior para detectar patrones en el suelo y mantener la posición a baja altura (< 5-10 metros aprox.). También usa el barómetro para mantener la altitud.</li>
+                            <li>Útil para volar en interiores donde no hay señal GPS, o como respaldo si se pierde la señal GPS en exteriores (aunque menos preciso).</li>
+                            <li><strong class="highlight">MUCHO MENOS PRECISO que el GPS.</strong> El dron puede derivar (moverse solo), especialmente con viento, suelos uniformes/reflectantes, o poca luz.</li>
+                            <li><strong class="highlight">¡¡SIN FUNCIONES GPS!!</strong> En este modo, <strong class="highlight">NO FUNCIONA</strong> el Retorno a Casa automático (RTH), ni Sígueme por GPS, ni Waypoints.</li>
+                            <li><strong>Cómo activar (si estás en exterior y quieres forzarlo):</strong> Antes de despegar (después de calibrar), mantén presionado el botón <code class="highlight">GPS</code> en el mando durante ~5 segundos. Oirás un pitido y la pantalla cambiará a Modo 1 / OPTI.</li>
+                        </ul>
+                         <img src="https://placehold.co/200x200/e9ecef/333?text=Icono+Flujo+%C3%93ptico" alt="Icono de modo Flujo Óptico">
+                    </li>
+                </ul>
+                 <div class="warning">
+                    <h4>¡Prioriza la Seguridad!</h4>
+                    <p><strong>VUELA SIEMPRE EN MODO GPS (Modo 2) EN EXTERIORES</strong> siempre que sea posible. Es infinitamente más seguro.</p>
+                    <p>Si decides volar en Modo 1 (OPTI), hazlo con extrema precaución, a baja altura, sin alejarte demasiado y siendo consciente de que <strong class="highlight">no tendrás las redes de seguridad del GPS</strong> (como el RTH automático).</p>
+                </div>
+            </section>
+
+             <div class="section-divider"></div>
+
+            <section id="volar">
+                <h2>8. ¡A Volar! Pasos Finales y Controles</h2>
+
+                 <div class="important-step">
+                    <h3>Paso 8.1: Verificar Estado y Señal GPS (Modo 2)</h3>
+                    <p>Antes de armar motores, confirma en la pantalla del mando o app:</p>
+                    <ul>
+                        <li>Modo de vuelo: <strong class="highlight">Modo 2 (GPS)</strong>.</li>
+                        <li>Número de Satélites: <strong class="highlight">> 10 (idealmente)</strong>.</li>
+                        <li>Mensaje "Ready to Fly" o similar, y/o "Home Point Recorded".</li>
+                        <li>Niveles de batería (dron y mando) suficientes.</li>
+                    </ul>
+                    <img src="https://placehold.co/500x250/d1ecf1/0c5460?text=Checklist+Final:+GPS+OK,+Baterias+OK" alt="Checklist final antes de despegar: GPS listo, baterías cargadas">
+                </div>
+
+                <div class="important-step">
+                    <h3>Paso 8.2: Desbloquear Motores (Armar)</h3>
+                    <p>Activa las hélices para prepararte para el despegue.</p>
+                    <ol>
+                        <li>Confirma que la zona alrededor del dron está despejada.</li>
+                        <li>Realiza el <strong class="highlight">"Comando de Palancas Combinado" (CSC):</strong> Mueve ambas palancas del mando simultáneamente hacia las <strong class="highlight">esquinas inferiores externas</strong> (Izq -> abajo-izquierda, Der -> abajo-derecha) O hacia las <strong class="highlight">esquinas inferiores internas</strong> (Izq -> abajo-derecha, Der -> abajo-izquierda). Mantenlas 1-2 segundos.</li>
+                        <li>Las hélices comenzarán a girar a baja velocidad. <strong class="highlight">¡Dron armado!</strong> Suelta las palancas a su posición central.</li>
+                    </ol>
+                    <img src="https://placehold.co/600x300/d1ecf1/0c5460?text=Armado+de+Motores+(Palancas+Abajo-Afuera)" alt="Movimiento de palancas para armar/desbloquear los motores">
+                </div>
+
+                <h3>Controles Básicos de Vuelo (Modo 2 Estándar)</h3>
+                <img src="https://placehold.co/700x450/e9ecef/333?text=Diagrama+Controles+de+Vuelo+(Modo+2)" alt="Diagrama de los controles de vuelo básicos en Modo 2">
+                <ul>
+                    <li><strong>Palanca Izquierda (Acelerador/Guiñada):</strong>
+                        <ul>
+                            <li><strong class="highlight">Arriba:</strong> ASCENDER (Subir).</li>
+                            <li><strong class="highlight">Abajo:</strong> DESCENDER (Bajar).</li>
+                            <li><strong class="highlight">Izquierda:</strong> GIRAR a la Izquierda (Yaw Left).</li>
+                            <li><strong class="highlight">Derecha:</strong> GIRAR a la Derecha (Yaw Right).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Palanca Derecha (Dirección/Alabeo/Cabeceo):</strong>
+                        <ul>
+                            <li><strong class="highlight">Arriba:</strong> AVANZAR (Pitch Forward).</li>
+                            <li><strong class="highlight">Abajo:</strong> RETROCEDER (Pitch Backward).</li>
+                            <li><strong class="highlight">Izquierda:</strong> DESPLAZARSE a la Izquierda (Roll Left).</li>
+                            <li><strong class="highlight">Derecha:</strong> DESPLAZARSE a la Derecha (Roll Right).</li>
+                        </ul>
+                    </li>
+                </ul>
+                 <div class="note">
+                    <h4>¡Empieza Suave!</h4>
+                    <p>Al principio, realiza movimientos <strong class="highlight">cortos y suaves</strong> con las palancas. Evita movimientos bruscos. Practica el vuelo estacionario (hovering) a baja altura (1-2 metros) antes de intentar movimientos más complejos.</p>
+                </div>
+
+                <h3>Despegue y Aterrizaje Controlado</h3>
+                <ul>
+                    <li><strong>Despegue Automático:</strong> Con motores armados, pulsa brevemente el botón <code class="highlight">Despegue/Aterrizaje Auto</code>. El dron subirá a ~1.5m y esperará tus comandos.</li>
+                    <li><strong>Despegue Manual:</strong> Con motores armados, empuja <strong class="highlight">LENTAMENTE</strong> la palanca izquierda (acelerador) hacia arriba hasta que el dron se eleve del suelo. Sigue subiendo suavemente hasta la altura deseada.</li>
+                    <li><strong>Aterrizaje Automático:</strong> Mientras vuela, pulsa brevemente el botón <code class="highlight">Despegue/Aterrizaje Auto</code>. El dron descenderá y aterrizará donde esté.</li>
+                    <li><strong>Aterrizaje Manual:</strong> Reduce altura gradualmente bajando la palanca izquierda. Cerca del suelo, baja <strong class="highlight">muy suavemente</strong> hasta que toque tierra. Una vez en el suelo, <strong class="highlight">mantén la palanca izquierda totalmente abajo</strong> durante unos segundos hasta que los motores se paren por completo (desarmado).</li>
+                </ul>
+                 <img src="https://placehold.co/500x250/e9ecef/333?text=Despegue+y+Aterrizaje+Manual+vs+Auto" alt="Comparativa despegue/aterrizaje manual y automático">
+
+                <h3>Parar Motores (Desarmar)</h3>
+                <p>Normalmente, al aterrizar manualmente y mantener la palanca izquierda abajo, los motores se paran solos. También puedes forzar el desarmado realizando el mismo CSC (comando de palancas) que usaste para armar.</p>
+                <div class="warning">
+                    <h4>Parada de Emergencia (¡Solo Extrema Necesidad!)</h4>
+                    <p>Si el dron está fuera de control y hay riesgo INMINENTE de un choque grave contra personas o propiedades, puedes forzar la parada de motores EN VUELO. La combinación suele ser mantener ambas palancas en las esquinas inferiores internas durante varios segundos, o presionar simultáneamente ciertos botones (¡¡consulta el manual original!!). <strong class="highlight">¡OJO! El dron CAERÁ sin control.</strong> Úsalo solo como último recurso absoluto.</p>
+                </div>
+            </section>
+
+             <div class="section-divider"></div>
+
+            <section id="funciones">
+                 <h2>9. Funciones de Vuelo Adicionales</h2>
+
+                <h3>Modo Headless (Sin Cabeza / Orientación Inteligente)</h3>
+                <p>Pulsa el botón <code class="highlight">Headless</code>. El mando pitará. Con este modo activo, la dirección de vuelo <strong class="highlight">depende de tu posición, no de hacia dónde mire la nariz del dron</strong>.</p>
+                <ul>
+                    <li>Palanca derecha <strong class="highlight">hacia adelante</strong> -> El dron <strong class="highlight">se aleja</strong> de ti.</li>
+                    <li>Palanca derecha <strong class="highlight">hacia atrás</strong> -> El dron <strong class="highlight">se acerca</strong> a ti.</li>
+                    <li>Palanca derecha <strong class="highlight">a la izquierda/derecha</strong> -> El dron se mueve a <strong class="highlight">tu izquierda/derecha</strong>.</li>
+                </ul>
+                <p>Es útil si eres principiante o si el dron está lejos y no distingues bien su orientación. Para que funcione correctamente, actívalo cuando el dron esté delante de ti, antes de empezar a moverlo mucho.</p>
+                <img src="https://placehold.co/500x250/e9ecef/333?text=Ilustracion+Modo+Headless" alt="Ilustración conceptual del modo Headless">
+
+                <h3>Retorno a Casa (RTH - Return To Home) - <span class="highlight">¡Solo en Modo GPS!</span></h3>
+                <p>Una función de seguridad crucial que trae el dron de vuelta al punto de despegue grabado.</p>
+                <h4>Tipos de RTH:</h4>
+                <ol>
+                    <li><strong>RTH Inteligente (Iniciado por el Piloto):</strong>
+                        <ul>
+                            <li>Pulsa y mantén presionado el botón <code class="highlight">RTH</code> en el mando.</li>
+                            <li>El dron (normalmente) ascenderá a una altitud de seguridad predefinida (ej. 20-30m) si está por debajo de ella.</li>
+                            <li>Volará en línea recta hacia el "Home Point" grabado.</li>
+                            <li>Descenderá y aterrizará automáticamente.</li>
+                            <li>Puedes <strong class="highlight">cancelar el RTH</strong> pulsando de nuevo el botón RTH (recuperas el control manual).</li>
+                        </ul>
+                    </li>
+                    <li><strong>RTH por Batería Baja (Automático):</strong>
+                        <ul>
+                            <li>Cuando la batería alcanza un nivel crítico (ej. 10-15%), el dron inicia el RTH automáticamente.</li>
+                            <li>Normalmente <strong class="highlight">no se puede cancelar</strong>. Es una medida de seguridad extrema.</li>
+                            <li>¡Anticípate! Aterriza tú mismo antes de llegar a este punto.</li>
+                        </ul>
+                    </li>
+                    <li><strong>RTH por Pérdida de Señal / Failsafe (Automático):</strong>
+                        <ul>
+                            <li>Si el dron pierde la conexión con el mando durante X segundos (ej. 6 seg), iniciará el RTH automáticamente.</li>
+                            <li>Si recupera la señal durante el RTH, puedes cancelarlo (pulsando RTH) o dejar que continúe.</li>
+                        </ul>
+                    </li>
+                </ol>
+                 <div class="warning">
+                    <h4>¡Consideraciones Clave para un RTH Seguro!</h4>
+                    <ul>
+                        <li><strong class="highlight">Requiere GPS:</strong> Asegúrate de tener buena señal (>7-10 satélites) y que el "Home Point" se haya grabado correctamente al inicio (el dron suele pitar o mostrarlo en pantalla).</li>
+                        <li><strong class="highlight">¡NO ESQUIVA OBSTÁCULOS!</strong> El dron vuela en línea recta hacia el punto de origen. Asegúrate de que la altitud de retorno configurada sea suficiente para superar CUALQUIER obstáculo en la trayectoria (árboles altos, edificios, antenas).</li>
+                        <li><strong class="highlight">Viento:</strong> Con viento fuerte, el dron puede desviarse o tardar más en volver, consumiendo más batería.</li>
+                        <li><strong class="highlight">Precisión:</strong> El aterrizaje puede tener un margen de error de 1-2 metros. Asegúrate de que el punto de despegue esté despejado.</li>
+                        <li><strong class="highlight">Supervisión:</strong> Aunque sea automático, vigila siempre el dron durante el RTH y prepárate para cancelar y tomar control si es necesario.</li>
+                    </ul>
+                </div>
+                <img src="https://placehold.co/600x300/fff3cd/856404?text=Trayectoria+RTH+y+Altitud+de+Seguridad" alt="Ilustración de la trayectoria RTH y la importancia de la altitud de seguridad">
+
+                <h3>Control de Cámara y Grabación</h3>
+                 <ul>
+                    <li><strong>Inclinar Cámara (Gimbal Tilt):</strong> Usa la <strong class="highlight">rueda o botones dedicados</strong> en el mando (suelen estar en los "hombros" o parte superior) para ajustar suavemente el ángulo vertical de la cámara.</li>
+                    <li><strong>Tomar Foto:</strong> Pulsa brevemente el botón <code class="highlight">Foto</code> (icono de cámara). Oirás un sonido o verás una indicación.</li>
+                    <li><strong>Grabar Vídeo:</strong> Pulsa brevemente el botón <code class="highlight">Vídeo</code> (icono de videocámara) para <strong class="highlight">iniciar</strong> la grabación. La pantalla/app mostrará un indicador de grabación (REC, punto rojo). Pulsa de nuevo para <strong class="highlight">detener</strong> la grabación.</li>
+                </ul>
+                 <img src="https://placehold.co/600x300/e9ecef/333?text=Controles+de+C%C3%A1mara:+Tilt,+Foto,+Video" alt="Controles para inclinar la cámara, tomar foto y grabar vídeo">
+            </section>
+
+             <div class="section-divider"></div>
+
+            <section id="funciones-app">
+                 <h2>10. Funciones Inteligentes de la APP</h2>
+                <p>Explora estas funciones desde la interfaz de la aplicación móvil para añadir creatividad a tus vuelos (la mayoría requieren buena señal GPS y condiciones óptimas).</p>
+                <img src="https://placehold.co/700x450/e9ecef/333?text=Interfaz+Principal+de+la+APP+(Ejemplo)" alt="Ejemplo de la interfaz principal de la aplicación del dron">
+                <ul>
+                    <li><strong>Sígueme GPS (Follow Me):</strong> El dron te sigue basándose en la ubicación GPS de tu teléfono móvil. Requiere espacio abierto y buena señal GPS tanto en el dron como en el móvil.</li>
+                    <li><strong>Seguimiento de Objetivo (Tracking):</strong> Toca sobre un objeto o persona en la pantalla. El dron intentará mantenerlo encuadrado usando la cámara. Funciona mejor con objetos claros, buen contraste y movimientos lentos. Suele usar el modo de flujo óptico.</li>
+                     <li><strong>Vuelo por Puntos de Ruta (Waypoint Flight):</strong> Abre el mapa en la app, toca para marcar varios puntos y define la ruta. El dron volará autónomamente siguiendo esos puntos. ¡Planifica con cuidado la altitud y los obstáculos!</li>
+                    <li><strong>Vuelo Orbital (Point of Interest / Orbit):</strong> Selecciona un punto central (tocando en el mapa o usando la posición actual del dron), define un radio y una velocidad. El dron volará en círculo alrededor de ese punto, manteniendo la cámara enfocada en él.</li>
+                    <li><strong>Control por Gestos:</strong> Activa la función en la app. A unos 2 metros frente a la cámara del dron:
+                        <ul>
+                            <li>Muestra el gesto de <strong class="highlight">"Paz" o "Victoria" (V)</strong> con una mano para tomar una foto (habrá una cuenta atrás).</li>
+                            <li>Muestra el gesto de la <strong class="highlight">palma abierta</strong> o un <strong class="highlight">cuadrado con ambas manos</strong> para iniciar/detener la grabación de vídeo.</li>
+                        </ul>
+                        Requiere buena iluminación y reconocimiento claro del gesto.
+                        <img src="https://placehold.co/500x250/e9ecef/333?text=Gestos+Foto+(V)+y+Video+(Palma)" alt="Gestos de Victoria para foto y Palma para vídeo">
+                    </li>
+                     <li><strong>Modo MV (Music Video):</strong> Una sección de la app para grabar clips cortos añadiendo filtros, efectos de transición y música directamente desde la app.</li>
+                </ul>
+                 <div class="note">
+                    <p>Experimenta con estas funciones en un área muy abierta y segura, empezando con configuraciones sencillas hasta que te familiarices con su comportamiento.</p>
+                </div>
+            </section>
+
+             <div class="section-divider"></div>
+
+             <section id="problemas">
+                <h2>11. Solución de Problemas Comunes</h2>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Problema</th>
+                            <th>Posible Causa(s)</th>
+                            <th>Solución(es)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Dron no enciende</strong></td>
+                            <td>Batería descargada / mal insertada / defectuosa.</td>
+                            <td>Carga la batería al 100%. Asegúrate de que hace "clic" al insertarla. Prueba con otra batería si tienes.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mando no conecta con dron (no empareja)</strong></td>
+                            <td>Secuencia de encendido incorrecta. Baterías bajas (mando o dron). Demasiada interferencia. Dron/mando defectuoso.</td>
+                            <td>Apaga todo. Sigue secuencia: 1º DRON, 2º MANDO. Carga ambas baterías. Aléjate de routers WiFi, otros mandos. Intenta emparejar de nuevo.</td>
+                        </tr>
+                         <tr>
+                            <td><strong>Motores no arman / no desbloquean</strong></td>
+                            <td>Calibración pendiente (brújula/giro). Sin señal GPS suficiente (en Modo 2). Palancas CSC incorrectas. Dron no está en superficie plana. Error interno.</td>
+                            <td>Realiza AMBAS calibraciones (Brújula + Giroscopio). Sal a exterior y espera señal GPS (>7-10 satélites). Revisa el movimiento exacto de palancas para armar. Coloca el dron en suelo nivelado. Reinicia dron y mando.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dron vuela errático, se desvía solo (drift)</strong></td>
+                            <td>Calibración necesaria. Viento. Interferencias magnéticas (afecta brújula). Suelo inadecuado para Flujo Óptico (si está en Modo 1). Hélices dañadas/desequilibradas.</td>
+                            <td>Recalibra Brújula y Giroscopio. Aterriza si hay mucho viento. Cambia de zona de vuelo (lejos de metal). Revisa/cambia hélices. Si usas Modo 1, busca suelo con textura/contraste. Prioriza Modo 2 (GPS) en exterior.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>APP no muestra imagen (pantalla negra)</strong></td>
+                            <td>Móvil no conectado al WiFi del dron. Permisos de la APP no concedidos. App bloqueada. Interferencia WiFi.</td>
+                            <td>Verifica conexión WiFi al dron en ajustes del móvil. Otorga permisos (Cámara, Almacenamiento, Ubicación) a la app en ajustes del móvil. Cierra y vuelve a abrir la app. Reinicia móvil y dron. Cambia de canal WiFi si la app lo permite.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vídeo con saltos (lag), pixelado o baja calidad</strong></td>
+                            <td>Señal WiFi débil/interferida. Móvil sobrecargado. Tarjeta SD (si usa) lenta o llena. Ajustes de grabación bajos.</td>
+                            <td>Acércate al dron. Vuela en zonas con menos redes WiFi. Cierra otras apps en el móvil. Usa una tarjeta SD rápida (U3/V30 recomendada) y formatéala. Sube la calidad de grabación en la app (si es posible).</td>
+                        </tr>
+                         <tr>
+                            <td><strong>RTH no se activa o no funciona bien</strong></td>
+                            <td>Sin señal GPS (Modo 1 activo o <7 satélites). Home Point no grabado. Altitud RTH demasiado baja. Obstáculos en ruta. Batería extremadamente baja (no da para volver).</td>
+                            <td>Asegúrate de volar en Modo 2 (GPS) con buena señal (>7-10 satélites). Espera confirmación "Home Point Recorded". Configura una altitud RTH segura (ej. 30-50m) en la app. Revisa visualmente la ruta de vuelta. Aterriza antes de que la batería esté crítica.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gestos no funcionan</strong></td>
+                            <td>Mala iluminación (poca luz o contraluz). Demasiado lejos/cerca (<1.5m o >3m aprox). Gesto no claro. Función no activa en la app.</td>
+                            <td>Busca buena iluminación frontal. Colócate a unos 2m de la cámara. Haz el gesto claramente con la mano bien visible. Activa el modo gestos en la app.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+             <div class="section-divider"></div>
+
+            <section id="mantenimiento">
+                <h2>12. Cuidados Posteriores y Mantenimiento Preventivo</h2>
+                <p>Un buen cuidado prolonga la vida de tu dron y asegura vuelos más seguros.</p>
+                <ul>
+                    <li><strong>Secuencia de Apagado:</strong> Siempre apaga <strong class="highlight">PRIMERO el DRON</strong> (mantén pulsado su botón) y <strong class="highlight">LUEGO el MANDO</strong>.</li>
+                    <li><strong>Limpieza:</strong> Usa un paño suave y seco (o ligeramente humedecido si es necesario) para limpiar el cuerpo del dron y el mando. Usa aire comprimido suave para limpiar polvo de motores y gimbal (con cuidado). <strong class="highlight">Nunca uses disolventes ni sumerjas en agua.</strong></li>
+                    <li><strong>Inspección Post-Vuelo:</strong> Dedica un minuto a revisar:
+                        <ul>
+                            <li>Hélices: Busca cualquier fisura, golpe o deformación. Reemplaza al menor signo de daño.</li>
+                            <li>Motores: Gíralos suavemente con la mano. Deben girar libres, sin ruidos raros ni resistencias.</li>
+                            <li>Cuerpo/Brazos: Busca grietas o daños estructurales, especialmente si tuviste un aterrizaje brusco.</li>
+                            <li>Gimbal/Cámara: Asegúrate de que se mueve libremente (con el dron apagado) y que la lente está limpia.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Almacenamiento:</strong>
+                        <ul>
+                            <li>Guarda el dron y accesorios en su estuche o en un lugar protegido del polvo, la humedad y temperaturas extremas.</li>
+                            <li><strong class="highlight">Baterías:</strong> Si no vas a volar en más de una semana, <strong class="highlight">descarga/carga las baterías hasta un nivel de almacenamiento (aprox. 40-60%)</strong>. NO las guardes ni totalmente cargadas ni totalmente descargadas por largos periodos. Guárdalas en un lugar fresco y, si es posible, en una bolsa ignífuga para baterías Lipo.</li>
+                            <li>Quita la batería del dron para almacenarlo.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Actualizaciones:</strong> Revisa periódicamente si hay actualizaciones de firmware para el dron, el mando o la app. Las actualizaciones pueden mejorar el rendimiento y la seguridad. Sigue las instrucciones del fabricante para actualizar.</li>
+                </ul>
+                 <img src="https://placehold.co/600x300/e9ecef/333?text=Almacenamiento+Seguro+y+Cuidado+Baterias" alt="Almacenamiento seguro del dron y cuidado de las baterías Lipo">
+            </section>
+
+            <footer>
+                <p>Manual adaptado para SG907 MAX. Basado en el documento original proporcionado.</p>
+                <p>Recuerda siempre volar con responsabilidad y respetando la normativa vigente en España.</p>
+                <p>Última revisión del contenido: 13 de Abril de 2025.</p>
+            </footer>
+
+        </div> </div> <script>
+        // --- PDF Generation Script ---
+        document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+            const manualContent = document.getElementById('manualContent');
+            const pdfStatus = document.getElementById('pdfStatus');
+            const downloadButton = this;
+
+            pdfStatus.textContent = 'Generando PDF, por favor espera...';
+            downloadButton.disabled = true; // Deshabilitar botón durante la generación
+
+            // Opciones para html2canvas (pueden mejorar la calidad)
+            const options = {
+                scale: 2, // Aumenta la escala para mejor resolución en el PDF
+                useCORS: true, // Necesario si hay imágenes de otros dominios (placeholders)
+                logging: false
+            };
+
+            html2canvas(manualContent, options).then(canvas => {
+                try {
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+
+                    // Crear instancia de jsPDF (A4: 210mm x 297mm)
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+                    // Calcular dimensiones de la imagen para que quepa en el ancho A4, manteniendo proporción
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const imgWidth = pdfWidth - 20; // Dejar márgenes de 10mm a cada lado
+                    const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+
+                    let heightLeft = imgHeight;
+                    let position = 10; // Margen superior inicial
+
+                    // Añadir la primera parte de la imagen
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= (pdfHeight - 20); // Restar altura de la primera página (con márgenes)
+
+                    // Añadir páginas adicionales si la imagen es más alta que una página A4
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight + 10; // Calcular posición Y negativa para la siguiente sección
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                        heightLeft -= (pdfHeight - 20);
+                    }
+
+                    // Guardar el PDF
+                    pdf.save('Manual_Dron_SG907MAX.pdf');
+                    pdfStatus.textContent = '¡PDF generado con éxito!';
+
+                } catch (error) {
+                    console.error("Error generando el PDF:", error);
+                    pdfStatus.textContent = 'Error al generar el PDF. Revisa la consola.';
+                } finally {
+                     downloadButton.disabled = false; // Habilitar botón de nuevo
+                     // Opcional: Limpiar mensaje de estado después de unos segundos
+                     setTimeout(() => { pdfStatus.textContent = ''; }, 5000);
+                }
+
+            }).catch(error => {
+                 console.error("Error con html2canvas:", error);
+                 pdfStatus.textContent = 'Error al capturar la página. Revisa la consola.';
+                 downloadButton.disabled = false; // Habilitar botón de nuevo
+            });
+        });
+    </script>
+
+</body>
+</html>
